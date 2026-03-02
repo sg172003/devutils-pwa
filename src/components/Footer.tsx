@@ -34,8 +34,7 @@ export default function Footer() {
                         <span>
                             by{' '}
                             <span style={{ color: 'var(--color-text-secondary)', fontWeight: 500 }}>Sarthak</span>
-                            {' & '}
-                            <span style={{ color: 'var(--color-text-secondary)', fontWeight: 500 }}>Antigravity AI</span>
+                            
                         </span>
                     </div>
                 </div>
