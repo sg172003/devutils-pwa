@@ -21,6 +21,7 @@ export default function Navbar() {
     const [searchOpen, setSearchOpen] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
     const searchRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     const drawerRef = useRef<HTMLDivElement>(null);
     const toggleBtnRef = useRef<HTMLButtonElement>(null);
 
@@ -31,10 +32,10 @@ export default function Navbar() {
         )
         : allTools;
 
-    // Reset active index when query changes
-    useEffect(() => { setActiveIndex(0); }, [query]);
+    useEffect(() => {
+        setActiveIndex(0);
+    }, [query]);
 
-    // Close search on outside click
     useEffect(() => {
         if (!searchOpen) return;
         const handleClickOutside = (e: MouseEvent) => {
@@ -46,22 +47,6 @@ export default function Navbar() {
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, [searchOpen]);
-
-    // Close mobile drawer on Escape
-    useEffect(() => {
-        if (!mobileOpen) return;
-        const handleEscape = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') {
-                setMobileOpen(false);
-                toggleBtnRef.current?.focus();
-            }
-        };
-        document.addEventListener('keydown', handleEscape);
-        return () => document.removeEventListener('keydown', handleEscape);
-    }, [mobileOpen]);
-
-    // Auto close drawer on route change
-    useEffect(() => { setMobileOpen(false); }, [location.pathname]);
 
     const handleSearchKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'ArrowDown') {
@@ -87,10 +72,22 @@ export default function Navbar() {
         setQuery('');
     };
 
+    useEffect(() => {
+        if (!mobileOpen) return;
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                setMobileOpen(false);
+                toggleBtnRef.current?.focus();
+            }
+        };
+        document.addEventListener('keydown', handleEscape);
+        return () => document.removeEventListener('keydown', handleEscape);
+    }, [mobileOpen]);
+
     const handleDrawerKeyDown = useCallback((e: React.KeyboardEvent) => {
         if (e.key !== 'Tab' || !drawerRef.current) return;
         const focusables = drawerRef.current.querySelectorAll<HTMLElement>(
-            'a[href], button:not([disabled])'
+            'a[href], button:not([disabled]), input:not([disabled])'
         );
         if (focusables.length === 0) return;
         const first = focusables[0];
@@ -103,6 +100,8 @@ export default function Navbar() {
             first.focus();
         }
     }, []);
+
+    useEffect(() => { setMobileOpen(false); }, [location.pathname]);
 
     const dropdownStyle: React.CSSProperties = {
         position: 'absolute',
@@ -128,23 +127,34 @@ export default function Navbar() {
     });
 
     return (
-        <nav style={{
-            height: 64,
-            borderBottom: '1px solid var(--color-border)',
-            backgroundColor: 'var(--color-bg)',
-            position: 'sticky',
-            top: 0,
-            zIndex: 50,
-        }}>
-            <div className="container" style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-
+        <nav
+            style={{
+                height: 64,
+                borderBottom: '1px solid var(--color-border)',
+                backgroundColor: 'var(--color-bg)',
+                position: 'sticky',
+                top: 0,
+                zIndex: 50,
+            }}
+        >
+            <div
+                className="container"
+                style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+            >
                 {/* Left: Logo + Nav Links */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
-                    <Link to="/" style={{
-                        display: 'flex', alignItems: 'center', gap: 8,
-                        fontSize: 16, fontWeight: 700,
-                        color: 'var(--color-text-primary)', textDecoration: 'none',
-                    }}>
+                    <Link
+                        to="/"
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 8,
+                            fontSize: 16,
+                            fontWeight: 700,
+                            color: 'var(--color-text-primary)',
+                            textDecoration: 'none',
+                        }}
+                    >
                         <Logo size={24} />
                         DevUtils
                     </Link>
@@ -173,17 +183,23 @@ export default function Navbar() {
                 {/* Right: Search + Actions */}
                 <div className="nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <div ref={searchRef} style={{ position: 'relative' }}>
-                        <div style={{
-                            display: 'flex', alignItems: 'center', gap: 8,
-                            padding: '6px 12px',
-                            borderRadius: 'var(--radius-md)',
-                            border: `1px solid ${searchOpen ? 'var(--color-primary)' : 'var(--color-border)'}`,
-                            backgroundColor: 'var(--color-surface)',
-                            fontSize: 13, minWidth: 200,
-                            transition: 'border-color 150ms',
-                        }}>
+                        <div
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 8,
+                                padding: '6px 12px',
+                                borderRadius: 'var(--radius-md)',
+                                border: `1px solid ${searchOpen ? 'var(--color-primary)' : 'var(--color-border)'}`,
+                                backgroundColor: 'var(--color-surface)',
+                                fontSize: 13,
+                                minWidth: 200,
+                                transition: 'border-color 150ms',
+                            }}
+                        >
                             <Search size={14} style={{ color: 'var(--color-text-muted)', flexShrink: 0 }} />
                             <input
+                                ref={inputRef}
                                 type="text"
                                 placeholder="Search tools..."
                                 value={query}
@@ -192,10 +208,12 @@ export default function Navbar() {
                                 onKeyDown={handleSearchKeyDown}
                                 aria-label="Search tools"
                                 style={{
-                                    border: 'none', outline: 'none',
+                                    border: 'none',
+                                    outline: 'none',
                                     background: 'transparent',
                                     color: 'var(--color-text-primary)',
-                                    fontSize: 13, width: '100%',
+                                    fontSize: 13,
+                                    width: '100%',
                                     fontFamily: 'inherit',
                                 }}
                             />
@@ -237,7 +255,7 @@ export default function Navbar() {
                         {isDark ? <Sun size={18} /> : <Moon size={18} />}
                     </button>
 
-                    
+                    <a
                         href="https://github.com"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -248,9 +266,12 @@ export default function Navbar() {
                             backgroundColor: 'var(--color-surface)',
                             border: '1px solid var(--color-border)',
                             color: 'var(--color-text-primary)',
-                            fontSize: 13, fontWeight: 500,
+                            fontSize: 13,
+                            fontWeight: 500,
                             textDecoration: 'none',
-                            display: 'flex', alignItems: 'center', gap: 6,
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 6,
                         }}
                     >
                         <Github size={14} /> GitHub
@@ -278,10 +299,17 @@ export default function Navbar() {
                     aria-label="Navigation menu"
                     onKeyDown={handleDrawerKeyDown}
                     style={{
-                        position: 'absolute', top: 64, left: 0, right: 0,
+                        position: 'absolute',
+                        top: 64,
+                        left: 0,
+                        right: 0,
                         backgroundColor: 'var(--color-bg)',
                         borderBottom: '1px solid var(--color-border)',
-                        padding: 16, display: 'flex', flexDirection: 'column', gap: 8, zIndex: 49,
+                        padding: 16,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 8,
+                        zIndex: 49,
                     }}
                 >
                     {navLinks.map(link => (
@@ -292,7 +320,8 @@ export default function Navbar() {
                                 textDecoration: 'none',
                                 color: location.pathname === link.to ? 'var(--color-primary)' : 'var(--color-text-secondary)',
                                 fontWeight: location.pathname === link.to ? 600 : 400,
-                                fontSize: 14, padding: '10px 12px',
+                                fontSize: 14,
+                                padding: '10px 12px',
                                 borderRadius: 'var(--radius-md)',
                             }}
                         >
@@ -308,10 +337,11 @@ export default function Navbar() {
                         >
                             {isDark ? <Sun size={18} /> : <Moon size={18} />}
                         </button>
-                        
+                        <a
                             href="https://github.com"
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="View source on GitHub"
                             style={{ padding: 8, color: 'var(--color-text-secondary)', borderRadius: 'var(--radius-md)', textDecoration: 'none' }}
                         >
                             <Github size={18} />
@@ -321,11 +351,11 @@ export default function Navbar() {
             )}
 
             <style>{`
-                @media (max-width: 767px) {
-                    .nav-desktop { display: none !important; }
-                    .nav-mobile-toggle { display: flex !important; }
-                }
-            `}</style>
+        @media (max-width: 767px) {
+          .nav-desktop { display: none !important; }
+          .nav-mobile-toggle { display: flex !important; }
+        }
+      `}</style>
         </nav>
     );
 }

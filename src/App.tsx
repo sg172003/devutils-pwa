@@ -1,3 +1,38 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
+import ErrorBoundary from './components/ErrorBoundary';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import JsonFormatter from './pages/JsonFormatter';
+import DummyData from './pages/DummyData';
+import JwtDecoder from './pages/JwtDecoder';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import Contributing from './pages/Contributing';
+
 export default function App() {
-  return <div>DevUtils</div>
+    return (
+        <ThemeProvider>
+            <ErrorBoundary>
+                <BrowserRouter>
+                    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+                        <Navbar />
+                        <main style={{ flex: 1 }}>
+                            <Routes>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/json-formatter" element={<JsonFormatter />} />
+                                <Route path="/dummy-data" element={<DummyData />} />
+                                <Route path="/jwt-decoder" element={<JwtDecoder />} />
+                                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                                <Route path="/terms-of-service" element={<TermsOfService />} />
+                                <Route path="/contributing" element={<Contributing />} />
+                            </Routes>
+                        </main>
+                        <Footer />
+                    </div>
+                </BrowserRouter>
+            </ErrorBoundary>
+        </ThemeProvider>
+    );
 }
