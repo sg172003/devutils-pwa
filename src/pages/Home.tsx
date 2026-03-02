@@ -83,7 +83,7 @@ export default function Home() {
                                 Start Using Tools
                             </Link>
                             <a
-                                href="https://github.com"
+                                href="https://github.com/sg172003/devutils-pwa"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="btn btn-secondary"

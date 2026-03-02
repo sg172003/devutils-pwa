@@ -256,7 +256,7 @@ export default function Navbar() {
                     </button>
 
                     <a
-                        href="https://github.com"
+                        href="https://github.com/sg172003/devutils-pwa"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="View source on GitHub"
