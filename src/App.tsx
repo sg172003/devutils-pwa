@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import { ThemeProvider } from './context/ThemeContext';
 import ErrorBoundary from './components/ErrorBoundary';
 import Navbar from './components/Navbar';
@@ -31,6 +32,7 @@ export default function App() {
                         </main>
                         <Footer />
                     </div>
+                    <Analytics />
                 </BrowserRouter>
             </ErrorBoundary>
         </ThemeProvider>
