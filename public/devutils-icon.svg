@@ -1,0 +1,7 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="96" fill="#6366F1"/>
+  <!-- D: block letter with cutout -->
+  <path d="M77 102h90c70.5 0 128 57.5 128 128s-57.5 128-128 128H77V102zm58 45v166h32c46 0 83-37 83-83s-37-83-83-83h-32z" fill="white" fill-rule="evenodd"/>
+  <!-- U: block letter with cutout -->
+  <path d="M320 102h58v186c0 42.3-34.7 77-77 77s-77-34.7-77-77V102h58v186c0 10.6 8.4 19 19 19s19-8.4 19-19V102z" fill="white" fill-rule="evenodd"/>
+</svg>
