@@ -58,7 +58,7 @@
 | Framework | [React 19](https://react.dev/) with functional components & hooks |
 | Language | [TypeScript 5.9](https://www.typescriptlang.org/) |
 | Build Tool | [Vite 7](https://vite.dev/) |
-| Styling | [Tailwind CSS 4](https://tailwindcss.com/) + vanilla CSS custom properties |
+| Styling | Vanilla CSS with custom properties (CSS variables) |
 | Routing | [React Router 7](https://reactrouter.com/) |
 | Icons | [Lucide React](https://lucide.dev/) |
 | PWA | [vite-plugin-pwa](https://vite-pwa-org.netlify.app/) (Workbox) |
