@@ -11,6 +11,7 @@ import JwtDecoder from './pages/JwtDecoder';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import Contributing from './pages/Contributing';
+import Base64Tool from "./pages/Base64Tool";
 
 export default function App() {
     return (
@@ -28,6 +29,7 @@ export default function App() {
                                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                                 <Route path="/terms-of-service" element={<TermsOfService />} />
                                 <Route path="/contributing" element={<Contributing />} />
+                                <Route path="/base64" element={<Base64Tool />} />
                             </Routes>
                         </main>
                         <Footer />
