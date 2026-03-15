@@ -58,15 +58,47 @@ export default function Base64Tool() {
   return (
     <div className="container" style={{ paddingTop: 32, paddingBottom: 40 }}>
       
-      {/* Header */}
-      <div style={{ marginBottom: 12 }}>
-        <h2 style={{ fontSize: 22, fontWeight: 700 }}>
-          Base64 Encoder / Decoder
-        </h2>
-        <p style={{ fontSize: 13, color: "var(--color-text-secondary)" }}>
-          Encode text to Base64 or decode Base64 strings directly in your browser.
-        </p>
-      </div>
+        {/* Header */}
+        <div
+        style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            marginBottom: 8,
+            flexWrap: "wrap",
+            gap: 12
+        }}
+        >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8, flexWrap: 'wrap', gap: 12 }}>
+            <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+                    <h2 style={{ fontSize: 22, fontWeight: 700 }}>Base64 Encoder / Decoder</h2>
+                    <span className="badge badge-primary">CLIENT-SIDE</span>
+                </div>
+                <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', margin: 0 }}>
+                    Encode text to Base64 or decode Base64 strings directly in your browser.
+                </p>
+            </div>
+        </div>
+
+        <div style={{ display: "flex", gap: 8 }}>
+            <button
+            className="btn btn-primary"
+            onClick={handleEncode}
+            style={{ padding: "8px 16px", fontSize: 13 }}
+            >
+            Encode
+            </button>
+
+            <button
+            className="btn btn-secondary"
+            onClick={handleDecode}
+            style={{ padding: "8px 16px", fontSize: 13 }}
+            >
+            Decode
+            </button>
+        </div>
+        </div>
 
       {/* Editor Layout */}
       <div className="tool-layout">
@@ -74,9 +106,11 @@ export default function Base64Tool() {
         {/* Input Panel */}
         <div className="tool-panel">
           <div className="tool-panel-header">
-            <span>Input</span>
+            <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                Input
+            </span>
             <div style={{ flex: 1 }} />
-            <button className="btn btn-ghost" onClick={handleClear}>
+            <button className="btn btn-ghost" onClick={handleClear} aria-label="Clear input" style={{ fontSize: 12, padding: '4px 10px' }}>
               <Trash2 size={12}/> Clear
             </button>
           </div>
@@ -95,7 +129,9 @@ export default function Base64Tool() {
         {/* Output Panel */}
         <div className="tool-panel">
           <div className="tool-panel-header">
-            <span>Output</span>
+            <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                Output
+            </span>
 
             {error && (
               <span className="status-pill status-error">
@@ -104,21 +140,11 @@ export default function Base64Tool() {
             )}
 
             <div style={{ flex: 1 }} />
-
-            <button
-              className="btn btn-ghost"
-              onClick={handleCopy}
-              disabled={!output}
-            >
-              <Copy size={12}/> {copied ? "Copied!" : "Copy"}
+            <button className="btn btn-ghost" onClick={handleCopy} disabled={!output} aria-label="Copy output" style={{ fontSize: 12, padding: '4px 10px' }}>
+                <Copy size={12} /> {copied ? 'Copied!' : 'Copy'}
             </button>
-
-            <button
-              className="btn btn-ghost"
-              onClick={handleDownload}
-              disabled={!output}
-            >
-              <Download size={12}/> Download
+            <button className="btn btn-ghost" onClick={handleDownload} disabled={!output} aria-label="Download output" style={{ fontSize: 12, padding: '4px 10px' }}>
+                <Download size={12} /> Download
             </button>
           </div>
 
@@ -132,17 +158,6 @@ export default function Base64Tool() {
             />
           </div>
         </div>
-      </div>
-
-      {/* Action Buttons */}
-      <div style={{ marginTop: 12, display: "flex", gap: 8 }}>
-        <button className="btn btn-primary" onClick={handleEncode}>
-          Encode
-        </button>
-
-        <button className="btn btn-secondary" onClick={handleDecode}>
-          Decode
-        </button>
       </div>
     </div>
   );
