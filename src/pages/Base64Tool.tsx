@@ -60,44 +60,45 @@ export default function Base64Tool() {
       
         {/* Header */}
         <div
-        style={{
+          style={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "flex-start",
             marginBottom: 8,
             flexWrap: "wrap",
             gap: 12
-        }}
+          }}
         >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8, flexWrap: 'wrap', gap: 12 }}>
-            <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
-                    <h2 style={{ fontSize: 22, fontWeight: 700 }}>Base64 Encoder / Decoder</h2>
-                    <span className="badge badge-primary">CLIENT-SIDE</span>
-                </div>
-                <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', margin: 0 }}>
-                    Encode text to Base64 or decode Base64 strings directly in your browser.
-                </p>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+              <h2 style={{ fontSize: 22, fontWeight: 700 }}>
+                Base64 Encoder / Decoder
+              </h2>
+              <span className="badge badge-primary">CLIENT-SIDE</span>
             </div>
-        </div>
 
-        <div style={{ display: "flex", gap: 8 }}>
+            <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', margin: 0 }}>
+              Encode text to Base64 or decode Base64 strings directly in your browser.
+            </p>
+          </div>
+
+          <div style={{ display: "flex", gap: 8 }}>
             <button
-            className="btn btn-primary"
-            onClick={handleEncode}
-            style={{ padding: "8px 16px", fontSize: 13 }}
+              className="btn btn-primary"
+              onClick={handleEncode}
+              style={{ padding: "8px 16px", fontSize: 13 }}
             >
-            Encode
+              Encode
             </button>
 
             <button
-            className="btn btn-secondary"
-            onClick={handleDecode}
-            style={{ padding: "8px 16px", fontSize: 13 }}
+              className="btn btn-secondary"
+              onClick={handleDecode}
+              style={{ padding: "8px 16px", fontSize: 13 }}
             >
-            Decode
+              Decode
             </button>
-        </div>
+          </div>
         </div>
 
       {/* Editor Layout */}

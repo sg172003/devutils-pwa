@@ -51,7 +51,11 @@ describe('base64Utils', () => {
     });
 
     test('throws error for invalid Base64', () => {
-      expect(() => decodeBase64('!!!NotBase64!!!')).toThrow();
+      expect(() => decodeBase64('!!!NotBase64!!!')).toThrow("Invalid Base64 string");
+    });
+
+    test('handles whitespace around Base64 input', () => {
+      expect(decodeBase64(' SGVsbG8gV29ybGQ= ')).toBe('Hello World');
     });
 
   });

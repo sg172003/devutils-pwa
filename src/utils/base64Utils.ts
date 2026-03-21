@@ -19,7 +19,8 @@ export function encodeBase64(text: string, urlSafe: boolean = false): string {
 
 export function decodeBase64(base64: string): string {
   try {
-    let normalized = base64.replace(/-/g, "+").replace(/_/g, "/");
+    let cleaned = base64.trim();
+    let normalized = cleaned.replace(/-/g, "+").replace(/_/g, "/");
 
     while (normalized.length % 4 !== 0) {
       normalized += "=";
