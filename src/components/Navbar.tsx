@@ -8,6 +8,7 @@ const allTools = [
     { to: '/json-formatter', label: 'JSON Formatter', description: 'Validate, format, and minify JSON data' },
     { to: '/dummy-data', label: 'Dummy Data Generator', description: 'Generate random user data for testing' },
     { to: '/jwt-decoder', label: 'JWT Decoder', description: 'Decode and inspect JSON Web Tokens' },
+    { to: '/base64', label: 'Base64 Encoder / Decoder', description: 'Encode text to Base64 or decode Base64 strings in your browser' },
 ];
 
 const navLinks = allTools.map(t => ({ to: t.to, label: t.label.replace(' Generator', '') }));
